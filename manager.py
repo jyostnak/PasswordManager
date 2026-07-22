@@ -76,7 +76,7 @@ def search_password():   # Searches for the required website details
         print("No passwords are stored.")
         return
     
-    # check if the input matches any of the data in the file
+    # Check if the input matches any of the data in the file
     if website in data:
         details = data[website]
         print(f"Username : {details['username']}")
@@ -100,15 +100,33 @@ def generate_password():   # Generates a password for the user
 
     # Generate the password
     password = ''
-    
+
     for i in range(length):
         password = password + secrets.choice(characters)
 
     return password
 
 
-def delete_password():
-    ...
+def delete_password():   # Deletes the data that the user doesn't require
+
+    # Load the data
+    data = storage.load_data()
+
+    # Handle the case if the file in empty
+    if not data:
+        print("No passwords are stored.")
+
+    # Take users input
+    website = input("Website: ")
+
+    # Check if the input matches any of the data in the file
+    if website in data:
+        del data[website]
+        
+    else:
+        print(f"The information related to {website} does not exist in the file.")
+
+
 
 
 def update_data(website, data):       # Updates the already existing password or/and username 
