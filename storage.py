@@ -1,7 +1,6 @@
 import json
 
-def create_storage_file():                                                      
-    # Creates a JSON file in case it doesn't exist
+def create_storage_file():                       # Creates a JSON file in case it doesn't exist
 
     try:
         with open("passwords.json", "x") as file:
@@ -20,8 +19,7 @@ def create_storage_file():
         print(f"An operating system error occured: {e}")
         
     
-def load_data():                                                        
-    # Reads the data present in the JSON file
+def load_data():                                # Reads the data present in the JSON file
 
     try:
         data = {}
@@ -29,6 +27,7 @@ def load_data():
             data = json.load(file)
 
     except FileNotFoundError:
+        # Does not crash if the file does not exists
         print("The file does not exist.")
 
     except PermissionError:
@@ -44,8 +43,7 @@ def load_data():
     return data
 
 
-def save_data(data):                                                  
-    # Writes the data into the JSON file
+def save_data(data):                           # Writes the data into the JSON file
     
     try:
         with open("passwords.json", "w") as file:
