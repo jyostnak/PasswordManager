@@ -1,4 +1,6 @@
+import secrets
 import storage
+import string
 
 def add_entry():        # Adds password and it's related details into the JSON file
 
@@ -62,7 +64,7 @@ def view_passwords():
         print()
 
 
-def search_password():
+def search_password():   # Searches for the required website details
     # Load the data
     data = storage.load_data()
 
@@ -79,13 +81,31 @@ def search_password():
         details = data[website]
         print(f"Username : {details['username']}")
         print(f"Password : {details['password']}")
-        
+
     else:
         print(f"The information related to {website} does not exist in the file.")
 
 
-def generate_password():
-    ...
+def generate_password():   # Generates a password for the user
+
+    # Get the required characters 
+    characters = (
+    string.ascii_letters +
+    string.digits +
+    string.punctuation
+)
+
+    # Initialize the length of the password
+    length = secrets.randbelow(9) + 8
+
+    # Generate the password
+    password = ''
+    
+    for i in range(length):
+        password = password + secrets.choice(characters)
+
+    return password
+
 
 def delete_password():
     ...
