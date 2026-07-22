@@ -53,6 +53,9 @@ def search_password():
 def generate_password():
     ...
 
+def delete_password():
+    ...
+
 
 def update_data(website, data):
     # Ask the user what do they want to update

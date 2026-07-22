@@ -9,7 +9,7 @@ while True:
           1. Add password
           2. View password
           3. Search password
-          4. Exit
+          4. Delete password
           """)
     choice = input("\nWhat would you like to do? ").strip()
     
