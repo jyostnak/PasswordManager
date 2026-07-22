@@ -49,21 +49,40 @@ def view_passwords():
     # Load the data
     data = storage.load_data()
 
-    # Handle the case in the the file is empty
+    # Handle the case if the file is empty
     if not data:
         print("No passwords are stored.")
         return
 
     # If not empty, print the data
     for website, details in data.items():
-        print(f"Website : {website}")
-        print(f"Username: {details['username']}")
-        print(f"Password: {details['password']}")
+        print(f"Website  : {website}")
+        print(f"Username : {details['username']}")
+        print(f"Password : {details['password']}")
         print()
-        
+
 
 def search_password():
-    ...
+    # Load the data
+    data = storage.load_data()
+
+    # Ask the user for input
+    website = input("Website: ")
+
+    # Handle the case if the file in empty
+    if not data:
+        print("No passwords are stored.")
+        return
+    
+    # check if the input matches any of the data in the file
+    if website in data:
+        details = data[website]
+        print(f"Username : {details['username']}")
+        print(f"Password : {details['password']}")
+        
+    else:
+        print(f"The information related to {website} does not exist in the file.")
+
 
 def generate_password():
     ...
