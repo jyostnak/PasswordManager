@@ -2,7 +2,8 @@
 
 print("\nPASSWORD MANAGER")
 
-while True:                                 # Loop runs until the user enters a valid input or the user wants to exit
+while True:                                 
+# Loop runs until the user enters a valid input or the user wants to exit
     
     print("""
           1. Add password
@@ -12,33 +13,41 @@ while True:                                 # Loop runs until the user enters a 
           """)
     choice = input("\nWhat would you like to do? ").strip()
     
-    if choice == '1':                       # Adds the password to json file
+    # Adds the password to json file
+    if choice == '1':                       
         
-        while True:                         # Loop runs until the user enters a valid input
+        while True:                         
+        # Loop runs until the user enters a valid input
             
             print("\n1. Generate password\n2. Create your own password")
             order = input("\nWhat would you like to do? ").strip()
             
-            if order == '1':  # Generates a password
+            # Generates a password
+            if order == '1':  
                 print("Generate")
                 break
             
-            elif order == '2':              # Allows you to create your own password
+            # Allows you to create your own password
+            elif order == '2':              
                 print("Create your own")
                 break
             
             else:
                 print("\nEnter a valid input.")
     
-    elif choice == '2':                     # The user can view previously saved passwords in the json file
+    # The user can view previously saved passwords in the json file
+    elif choice == '2':                     
         print("View")
     
+    # The user can search the required website's password along with the username
     elif choice == '3':
-        print("Searching...")               # The user can search the required website's password along with the username
+        print("Searching...")               
     
-    elif choice == '4':                     # User exits the main menu
+    # User exits the main menu
+    elif choice == '4':                     
         break
     
+    # Warn the user, if entered a wrong input
     else:
         print("Enter a valid input.")
     
