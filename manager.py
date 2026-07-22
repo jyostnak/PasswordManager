@@ -45,7 +45,22 @@ def add_entry():        # Adds password and it's related details into the JSON f
 
 
 def view_passwords():
-    ...
+
+    # Load the data
+    data = storage.load_data()
+
+    # Handle the case in the the file is empty
+    if not data:
+        print("No passwords are stored.")
+        return
+
+    # If not empty, print the data
+    for website, details in data.items():
+        print(f"Website : {website}")
+        print(f"Username: {details['username']}")
+        print(f"Password: {details['password']}")
+        print()
+        
 
 def search_password():
     ...
@@ -57,7 +72,7 @@ def delete_password():
     ...
 
 
-def update_data(website, data):
+def update_data(website, data):       # Updates the already existing password or/and username 
     # Ask the user what do they want to update
     while True:
 
