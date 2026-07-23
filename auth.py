@@ -79,27 +79,39 @@ def change_master_password():     # Allows the user to change the master passwor
 
         if hash_password(confirm) == data['password']:
 
-            password = input("Password: ")
+            while True:
+                choice = input("Do you want us to generate the password?(y/n) ")
 
-            # Confirm password
-            for i in range(4):
+                if choice == 'y':
+                    password = manager.generate_password()
 
-                confirm_pass = input("Confirm password: ")
+                elif choice == 'n':
+                    password = input("New password: ")
 
-                if confirm_pass == password:
-                    data['password'] = hash_password(password)
+                    # Confirm password
+                    for i in range(4):
 
-                    storage.save_data(data, "master.json")    
-                    print("Master password updated successfully!") 
+                        confirm_pass = input("Confirm password: ")
 
-                    return
+                        if confirm_pass == password:
+                            data['password'] = hash_password(password)
 
-                if i == 3:
-                    print("Error: Too many wrong entries.")
-                    return
-                
+                            storage.save_data(data, "master.json")    
+                            print("Master password updated successfully!") 
+
+                            return
+
+                        if i == 3:
+                            print("Error: Too many wrong entries.")
+                            return
+                        
+                        else:
+                            print("Does not match the password. Please check and enter again.")
+
                 else:
-                    print("Does not match the password. Please check and enter again.")
+                    print("Enter a vlid input")
+
+
 
         else:
             if attempt == 2:

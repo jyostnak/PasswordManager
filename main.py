@@ -10,14 +10,14 @@ def main():
     # Loop runs until the user enters a valid input or the user wants to exit
         
         print("""
-            1. Add password
-            2. View password
-            3. Search password
-            4. Delete password
-            5. Change master password
-            6. Exit
-            """)
-        choice = input("\nWhat would you like to do? ").strip()
+1. Add password
+2. View password
+3. Search password
+4. Delete password
+5. Change master password
+6. Exit
+""")
+        choice = input("What would you like to do? ").strip()
         
         # Adds password and it's related details into the JSON file
         if choice == '1':                       
