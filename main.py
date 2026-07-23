@@ -10,41 +10,28 @@ while True:
           2. View password
           3. Search password
           4. Delete password
+          5. Exit
           """)
     choice = input("\nWhat would you like to do? ").strip()
     
-    # Adds the password to json file
+    # Adds password and it's related details into the JSON file
     if choice == '1':                       
-        
-        while True:                         
-        # Loop runs until the user enters a valid input
-            
-            print("\n1. Generate password\n2. Create your own password")
-            order = input("\nWhat would you like to do? ").strip()
-            
-            # Generates a password
-            if order == '1':  
-                print("Generate")
-                break
-            
-            # Allows you to create your own password
-            elif order == '2':              
-                print("Create your own")
-                break
-            
-            else:
-                print("\nEnter a valid input.")
+        ...
     
     # The user can view previously saved passwords in the json file
     elif choice == '2':                     
         print("View")
     
-    # The user can search the required website's password along with the username
+    # Searches for the required website details
     elif choice == '3':
         print("Searching...")               
     
-    # User exits the main menu
+    # Deletes the data that the user doesn't require
     elif choice == '4':                     
+        ...
+
+    # User exits the main menu
+    elif choice == '5':
         break
     
     # Warn the user, if entered a wrong input
