@@ -123,23 +123,32 @@ def search_password():   # Searches for the required website details
 
 def generate_password():   # Generates a password for the user
 
-    # Get the required characters 
-    characters = (
-    string.ascii_letters +
-    string.digits +
-    string.punctuation
-)
-
     # Initialize the length of the password
     length = secrets.randbelow(9) + 8
 
-    # Generate the password
-    password = ''.join(
-secrets.choice(characters)
-for _ in range(length)
-)
+    # Make sure that the password contains atleast one lowercase, uppercase, digit and punctuation
+    password = [
+        secrets.choice(string.ascii_lowercase),
+        secrets.choice(string.ascii_uppercase),
+        secrets.choice(string.digits),
+        secrets.choice(string.punctuation)
+    ]
 
-    return password
+    # Other characters required for the password
+    characters = (
+        string.ascii_letters +
+        string.digits +
+        string.punctuation
+    )
+
+    # Generate the password
+    for _ in range(length - 4):
+        password.append(secrets.choice(characters))
+
+    # Shuffle the generated password
+    secrets.SystemRandom().shuffle(password)
+
+    return ''.join(password)
 
 
 def delete_password():   # Deletes the data that the user doesn't require
