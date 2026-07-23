@@ -1,9 +1,9 @@
 import json
 
-def create_storage_file():                       # Creates a JSON file in case it doesn't exist
+def create_storage_file(filename):                       # Creates a JSON file in case it doesn't exist
 
     try:
-        with open("passwords.json", "x") as file:
+        with open(filename, "x") as file:
             json.dump({}, file)
         
     except PermissionError:    
@@ -19,11 +19,11 @@ def create_storage_file():                       # Creates a JSON file in case i
         print(f"An operating system error occured: {e}")
         
     
-def load_data():                                # Reads the data present in the JSON file
+def load_data(filename):                                # Reads the data present in the JSON file
 
     try:
         data = {}
-        with open("passwords.json", "r") as file:
+        with open(filename, "r") as file:
             data = json.load(file)
 
     except FileNotFoundError:
@@ -43,10 +43,10 @@ def load_data():                                # Reads the data present in the 
     return data
 
 
-def save_data(data):                           # Writes the data into the JSON file
+def save_data(data, filename):                           # Writes the data into the JSON file
     
     try:
-        with open("passwords.json", "w") as file:
+        with open(filename, "w") as file:
             json.dump(data, file, indent=4)
 
     except TypeError:                                                             

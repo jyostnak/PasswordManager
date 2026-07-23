@@ -5,7 +5,7 @@ import string
 def add_entry():        # Adds password and it's related details into the JSON file
 
     # Load the data
-    data = storage.load_data()
+    data = storage.load_data("passwords.json")
 
     # Take the input from user
     website = input("Website: ").strip().lower()
@@ -76,7 +76,7 @@ def add_entry():        # Adds password and it's related details into the JSON f
     }
 
     # Add the data back to the file
-    storage.save_data(data)
+    storage.save_data(data, "passwords.json")
 
     print("Password stored successfully!")
 
@@ -84,7 +84,7 @@ def add_entry():        # Adds password and it's related details into the JSON f
 def view_passwords():
 
     # Load the data
-    data = storage.load_data()
+    data = storage.load_data("passwords.json")
 
     # Handle the case if the file is empty
     if not data:
@@ -101,7 +101,7 @@ def view_passwords():
 
 def search_password():   # Searches for the required website details
     # Load the data
-    data = storage.load_data()
+    data = storage.load_data("passwords.json")
 
     # Ask the user for input
     website = input("Website: ").strip().lower()
@@ -154,7 +154,7 @@ def generate_password():   # Generates a password for the user
 def delete_password():   # Deletes the data that the user doesn't require
 
     # Load the data
-    data = storage.load_data()
+    data = storage.load_data("passwords.json")
 
     # Handle the case if the file in empty
     if not data:
@@ -167,7 +167,7 @@ def delete_password():   # Deletes the data that the user doesn't require
     # Check if the input matches any of the data in the file
     if website in data:
         del data[website]
-        storage.save_data(data)
+        storage.save_data(data, "passwords.json")
         print("Password deleted successfully!")
         
     else:
@@ -252,5 +252,5 @@ def update_data(website, data):       # Updates the already existing password or
             print("Enter a valid input.")
 
     # Add the data back to JSON file
-    storage.save_data(data)
+    storage.save_data(data, "passwords.json")
     print("Updated successfully!")
