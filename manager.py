@@ -185,7 +185,7 @@ def update_data(website, data):       # Updates the already existing password or
     1. Update password
     2. Update username
     3. Update both
-    4. Cancle
+    4. Cancel
 
     What would you like to do? """)
 
