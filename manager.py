@@ -184,6 +184,8 @@ def update_data(website, data):       # Updates the already existing password or
         choice = input("""
     1. Update password
     2. Update username
+    3. Update both
+    4. Cancle
 
     What would you like to do? """)
 
@@ -215,6 +217,36 @@ def update_data(website, data):       # Updates the already existing password or
             # Rewrite the username
             data[website]["username"] = username
             break
+
+        # Updates both the username and password
+        elif choice == '3':
+            password = input("New password: ")
+
+            # Confirm password
+            for i in range(4):
+                confirm_pass = input("Confirm password: ")
+                if confirm_pass == password:
+                    break
+
+                if i == 3:
+                    print("Could not update the password...")
+                    return
+                
+                else:
+                    print("Does not match the password. Please check and enter again.")
+
+            # Rewrite the password
+            data[website]["password"] = password
+
+            username = input("New username: ").strip()
+
+            # Rewrite the username
+            data[website]["username"] = username
+            break
+
+        # Exit
+        elif choice == '4':
+            return
 
         else:
             print("Enter a valid input.")
