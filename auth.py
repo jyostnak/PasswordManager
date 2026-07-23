@@ -27,6 +27,7 @@ def create_master_password():     # Creates the master password for the new user
         if choice == 'y':
             password = manager.generate_password()
             print(f"Password: {password}")
+            break
 
         elif choice == 'n':
 
@@ -51,9 +52,9 @@ def create_master_password():     # Creates the master password for the new user
         else:
             print("Enter a valid input.")
 
-        data['password'] = password
-
-    storage.save_data(data)
+    data['password'] = password
+    storage.save_data(data, 'master.json')
+    print("Your master password has been set successfully!")
 
 
 def verify_master_password():     # Check if the master password extered by the user matches the actual password or not
@@ -65,18 +66,14 @@ def verify_master_password():     # Check if the master password extered by the 
     password = input("Password: ")
 
     # Check if the password matches or not
-    if data['password'] == password:
-        return True
-    
-    else:
-        return False
+    return data['password'] == password
     
 
 def change_master_password():     # Allows the user to change the master password if they want to
 
     data = storage.load_data("master.json")
 
-    for i in range(3):
+    for attempt in range(3):
 
         confirm = input("Enter the previous password: ")
 
@@ -91,7 +88,11 @@ def change_master_password():     # Allows the user to change the master passwor
 
                 if confirm_pass == password:
                     data['password'] = password
-                    break
+
+                    storage.save_data(data, "master.json")    
+                    print("Master password updated successfully!") 
+
+                    return
 
                 if i == 3:
                     print("Error: Too many wrong entries.")
@@ -100,14 +101,14 @@ def change_master_password():     # Allows the user to change the master passwor
                 else:
                     print("Does not match the password. Please check and enter again.")
 
-                break
-
-            if i == 2:
+        else:
+            if attempt == 2:
                 print("Access denied.")
                 return 
 
             else:
-                print("Incorrect. Try again.")   
+                print("Incorrect. Try again.")  
 
-    storage.save_data(data, "master.json")     
+
+
 
