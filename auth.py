@@ -11,11 +11,7 @@ def master_exists():     # Checks if the master password exists or not
     data = storage.load_data("master.json")
 
     # Check if it is empty or not
-    if not data:
-        return False
-
-    else:
-        return True
+    return bool(data)
 
 
 def create_master_password():     # Creates the master password for the new users
