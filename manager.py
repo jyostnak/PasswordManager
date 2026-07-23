@@ -34,7 +34,38 @@ def add_entry():        # Adds password and it's related details into the JSON f
         
     else:
         username = input("Username: ")
-        password = input("Password: ")
+
+        # Ask the user if they want to generate the password or create their own
+        password_choice = input("Do you want us to generate the password?(y/n) ")
+
+        while True:
+
+            # Generate the password
+            if password_choice == 'y':
+                password = generate_password()
+                break
+
+            # Ask the user for password input
+            elif password_choice == 'n':
+                password = input("Password: ")
+
+                # Confirm password
+                for i in range(4):
+
+                    confirm_pass = input("Confirm password: ")
+
+                    if confirm_pass == password:
+                        break
+
+                    if i == 3:
+                        print("Error: Too many wrong entries.")
+                        return
+                    
+                    else:
+                        print("Does not match the password. Please check and enter again.")
+
+            else:
+                print("Enter a valid input.")
 
     # Update the data
     data[website] = {
@@ -44,6 +75,8 @@ def add_entry():        # Adds password and it's related details into the JSON f
 
     # Add the data back to the file
     storage.save_data(data)
+
+    print("Password stored successfully!")
 
 
 def view_passwords():
@@ -130,6 +163,7 @@ def delete_password():   # Deletes the data that the user doesn't require
 
 
 def update_data(website, data):       # Updates the already existing password or/and username 
+
     # Ask the user what do they want to update
     while True:
 
@@ -174,4 +208,3 @@ def update_data(website, data):       # Updates the already existing password or
     # Add the data back to JSON file
     storage.save_data(data)
     print("Updated successfully!")
-
