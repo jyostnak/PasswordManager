@@ -8,11 +8,11 @@ def add_entry():        # Adds password and it's related details into the JSON f
     data = storage.load_data()
 
     # Take the input from user
-    website = input("Website: ")
+    website = input("Website: ").strip().lower()
 
     # Check if the website already exists in the file
     if website in data:
-        # Ask the user if they want to rewtire the existing password or username
+        # Ask the user if they want to rewrite the existing password or username
 
         print("This website data already exists.")
 
@@ -33,16 +33,17 @@ def add_entry():        # Adds password and it's related details into the JSON f
                 print("Enter a valid input.")
         
     else:
-        username = input("Username: ")
+        username = input("Username: ").strip()
 
         # Ask the user if they want to generate the password or create their own
-        password_choice = input("Do you want us to generate the password?(y/n) ")
-
         while True:
+
+            password_choice = input("Do you want us to generate the password?(y/n) ")
 
             # Generate the password
             if password_choice == 'y':
                 password = generate_password()
+                print(f"Generated password: {password}")
                 break
 
             # Ask the user for password input
@@ -63,6 +64,7 @@ def add_entry():        # Adds password and it's related details into the JSON f
                     
                     else:
                         print("Does not match the password. Please check and enter again.")
+                break
 
             else:
                 print("Enter a valid input.")
@@ -102,7 +104,7 @@ def search_password():   # Searches for the required website details
     data = storage.load_data()
 
     # Ask the user for input
-    website = input("Website: ")
+    website = input("Website: ").strip().lower()
 
     # Handle the case if the file in empty
     if not data:
@@ -132,10 +134,10 @@ def generate_password():   # Generates a password for the user
     length = secrets.randbelow(9) + 8
 
     # Generate the password
-    password = ''
-
-    for i in range(length):
-        password = password + secrets.choice(characters)
+    password = ''.join(
+secrets.choice(characters)
+for _ in range(length)
+)
 
     return password
 
@@ -148,13 +150,16 @@ def delete_password():   # Deletes the data that the user doesn't require
     # Handle the case if the file in empty
     if not data:
         print("No passwords are stored.")
+        return
 
     # Take users input
-    website = input("Website: ")
+    website = input("Website: ").strip().lower()
 
     # Check if the input matches any of the data in the file
     if website in data:
         del data[website]
+        storage.save_data(data)
+        print("Password deleted successfully!")
         
     else:
         print(f"The information related to {website} does not exist in the file.")
@@ -196,7 +201,7 @@ def update_data(website, data):       # Updates the already existing password or
 
         # Update username
         elif choice == '2':
-            username = input("New username: ")
+            username = input("New username: ").strip()
 
             # Rewrite the username
             data[website]["username"] = username
